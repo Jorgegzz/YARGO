@@ -11,8 +11,6 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
 
-
-
 DEPEND="
 		sci-libs/fftw
 		dev-util/cmake
@@ -20,6 +18,3 @@ DEPEND="
 		"
 RDEPEND=${DEPEND}
 BDEPEND=""
-
-
-
