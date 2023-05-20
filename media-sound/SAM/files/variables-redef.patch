@@ -1,0 +1,25 @@
+From 32f6212c8f4eea2b0952a244b836a1676fedd40f Mon Sep 17 00:00:00 2001
+From: JorgeGzz <A01571510@tec.mx>
+Date: Sat, 20 May 2023 00:24:50 -0600
+Subject: [PATCH] Fix for variable redefinition
+
+---
+ src/reciter.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/reciter.c b/src/reciter.c
+index 4abd25f..962765f 100644
+--- a/src/reciter.c
++++ b/src/reciter.c
+@@ -4,7 +4,7 @@
+ #include "ReciterTabs.h"
+ #include "debug.h"
+ 
+-unsigned char A, X, Y;
++extern unsigned char A, X, Y;
+ extern int debug;
+ 
+ static unsigned char inputtemp[256];   // secure copy of input tab36096
+-- 
+2.39.3
+
