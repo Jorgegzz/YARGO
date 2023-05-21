@@ -1,12 +1,19 @@
-EAPI=8
+# Copyright 1999-2023 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
 
-DESCRIPTION="Software Automatic Mouth - Tiny Speech Synthesizer"
-HOMEPAGE="https://simulationcorner.net/index.php?page=sam"
-SRC_URI="https://github.com/s-macke/SAM/archive/a7b36ef.tar.gz -> ${PN}.tar.gz"
+EAPI=8
 
 COMMIT="a7b36efac730957b59471a42a45fd779f94d77dd"
 
-LICENSE="Unlicensed"
+DESCRIPTION="Software Automatic Mouth - Tiny Speech Synthesizer"
+HOMEPAGE="https://simulationcorner.net/index.php?page=sam"
+
+MY_PV="${PV/.0/}"
+MY_P="${PN}-${MY_PV}"
+
+SRC_URI="https://github.com/s-macke/SAM/archive/${MY_P}.tar.gz"
+
+LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
@@ -20,6 +27,7 @@ BDEPEND=""
 
 PATCHES=(
 	"${FILESDIR}/variables-redef.patch"
+	"${FILESDIR}/no-sdl-compiler-flags.patch"
 )
 
 src_unpack() {
@@ -31,13 +39,16 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${FILESDIR}/variables-redef.patch"
+	! use sdl && eapply "${FILESDIR}/no-sdl-compiler-flags.patch"
+
 	eapply_user
 }
 
+src_compile() {
+	emake || die "emake failed"
+}
+
 src_install() {
-	if [[ -f Makefile ]]; then
-		emake DESTDIR="${D}"
-	fi
 	einstalldocs
 	dobin sam
 }

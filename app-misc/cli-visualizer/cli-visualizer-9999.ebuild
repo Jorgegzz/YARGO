@@ -9,7 +9,7 @@ EGIT_REPO_URI="https://github.com/dpayne/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 
 DEPEND="
 		sci-libs/fftw
